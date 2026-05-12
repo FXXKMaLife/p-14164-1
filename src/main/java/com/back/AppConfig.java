@@ -4,7 +4,9 @@ import com.back.domain.member.member.entity.Member;
 import com.back.domain.member.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
+
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +23,21 @@ public class AppConfig {
     private AppConfig self;
 
     @Bean
+    HtmlRenderer htmlRenderer() {
+        return HtmlRenderer.builder().build();
+    }
+
+    @Bean
+    Parser parser() {
+        return Parser.builder().build();
+    }
+
+    @Bean
     int version(){
         return 55;
     }
     @Bean
-    ApplicationRunner baseInitDataApplicationRunner(){
+    ApplicationRunner makeSampleMemberDataApplicationRunner() {
         return args -> {
             self.work1(); //프록시
             this.work2(); //진짜객체
