@@ -78,10 +78,10 @@ public class WiseSayingController {
     @ResponseBody
     public String modify( //수정기능
             @PathVariable int id,
-            @RequestParam(defaultValue = "") String content,
+            @RequestParam(defaultValue = "") String content, //미리 작성해주면 null값이 들어간 경우를 걱정하지 않아도 됨
             @RequestParam(defaultValue = "") String author
     ) {
-        if (content.isBlank()) {
+        if (content.isBlank()) {//그래서 예외처리 조건이 깔끔해진다
             throw new IllegalArgumentException("Content cannot be null or blank");
         }
 
